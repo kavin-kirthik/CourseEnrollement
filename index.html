@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Unity Game Development</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        unity: {
+                            light: '#4b5563',
+                            DEFAULT: '#222c37',
+                            dark: '#111827',
+                        },
+                        accent: {
+                            DEFAULT: '#10b981', // Emerald green
+                            hover: '#059669',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a; /* Slate 900 */
+            color: #f8fafc; /* Slate 50 */
+        }
+        
+        /* Subtle grid background for a "development/gaming" feel */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        }
+        
+        .glow-box {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
+        }
+        
+        /* Background Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.3; /* Subtle background effect */
+        }
+    </style>
+</head>
+<body class="bg-grid antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Animated Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="w-full fixed top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-brands fa-unity text-accent text-3xl"></i>
+                    <span class="font-heading font-bold text-xl tracking-wider">Dev<span class="text-accent">Mentor</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">About Me</a>
+                        <a href="#contact" class="bg-accent hover:bg-accent-hover text-white px-4 py-2 rounded-md text-sm font-bold transition-all shadow-lg shadow-accent/30">Start Learning</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-16 sm:pt-40 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto flex flex-col items-center text-center">
+        <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-slate-700 bg-slate-800/50 text-slate-300 text-sm font-semibold tracking-wide backdrop-blur-sm">
+            <i class="fas fa-gamepad mr-2 text-accent"></i> Level Up Your Skills
+        </div>
+        
+        <h1 class="font-heading text-4xl sm:text-5xl lg:text-7xl font-black mb-6 leading-tight">
+            Master Unity <br class="hidden sm:block"/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-emerald-300 glow-text">Game Development</span>
+        </h1>
+        
+        <p class="mt-4 max-w-2xl text-lg sm:text-xl text-slate-400 mb-10 leading-relaxed">
+            Whether you are a <strong class="text-slate-200">college student</strong>, a <strong class="text-slate-200">kid with big dreams</strong>, or a <strong class="text-slate-200">dropout</strong> looking for a fresh, exciting career path—I will guide you from beginner to building your own amazing games.
+        </p>
+
+        <!-- Video Player Block -->
+        <div class="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden glow-box border border-slate-700 bg-black aspect-video relative shadow-2xl flex items-center justify-center">
+            <video 
+                src="pvz.mp4" 
+                controls 
+                class="w-full h-full object-cover outline-none"
+                poster="https://placehold.co/1920x1080/1e293b/10b981?text=Click+to+Play+Game+Dev+Reel"
+            >
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-800/30 border-y border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                
+                <!-- Image Placeholder -->
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <!-- Decorative background blob -->
+                        <div class="absolute -inset-4 bg-gradient-to-r from-accent to-emerald-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
+                        
+                        <!-- Actual Image Placeholder -->
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full border-4 border-slate-700 overflow-hidden bg-slate-800 flex items-center justify-center shadow-2xl">
+                            <!-- Replace src with your actual photo URL -->
+                            <img src="profile.png" alt="Teacher Profile" class="w-full h-full object-cover" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="w-full md:w-1/2 text-center md:text-left">
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold mb-6">Meet Your Instructor</h2>
+                    <div class="w-20 h-1 bg-accent mb-8 mx-auto md:mx-0 rounded-full"></div>
+                    
+                    <blockquote class="text-xl sm:text-2xl text-slate-300 italic font-light leading-relaxed border-l-4 border-accent pl-6 py-2">
+                        "Iam kavin and Iam a Unity developer who knows about texture, animation, and C# gameplay programming, who is willing to teach."
+                    </blockquote>
+                    
+                    <p class="mt-8 text-slate-400 leading-relaxed">
+                        My goal is to make game development accessible to everyone. We will dive deep into creating stunning visuals, breathing life into characters through animation, and writing solid C# code that makes your gameplay fun and engaging.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 flex-grow flex flex-col items-center justify-center px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-heading text-3xl sm:text-5xl font-black mb-6">Ready to Build Your First Game?</h2>
+            <p class="text-slate-400 text-lg mb-12">
+                Classes are structured around your pace and skill level. Reach out directly to discuss how we can start your game development journey today.
+            </p>
+            
+            <!-- WhatsApp Button -->
+            <a href="https://wa.me/918610768508" target="_blank" rel="noopener noreferrer" 
+               class="group inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1DA851] text-white font-heading font-bold text-xl py-5 px-10 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-[0_10px_30px_rgba(37,211,102,0.3)] hover:shadow-[0_15px_40px_rgba(37,211,102,0.5)]">
+                <i class="fa-brands fa-whatsapp text-3xl group-hover:scale-110 transition-transform duration-300"></i>
+                <span>Message me on WhatsApp</span>
+            </a>
+            
+            <p class="mt-6 text-slate-500 text-sm">
+                <a href="https://www.instagram.com/kavinkirthik20041?psln=MTBlZHJtYWZ3eGdxMA==">Instagram</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-8 text-center border-t border-slate-800 mt-auto">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <i class="fa-brands fa-unity text-slate-600 text-xl"></i>
+                <span class="font-heading font-bold text-slate-600">DevMentor</span>
+            </div>
+            <p class="text-slate-600 text-sm">
+                &copy; <script>document.write(new Date().getFullYear())</script> Unity Game Development Tutoring. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Canvas Sprite Animation Script -->
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Color Palette for Pixel Art
+        const _ = null; // Transparent
+        const R = '#E52521'; // Red
+        const B = '#00439C'; // Blue
+        const S = '#FDB37C'; // Skin
+        const W = '#7C3A00'; // Brown / Hair / Boots
+        const Y = '#F3C527'; // Yellow (Buttons)
+
+        // 3-Frame Run Cycle using Multi-dimensional Arrays (16x16 grid)
+        const spriteFrames = [
+            [ // Frame 1: Mid Stride / Standing
+                [_,_,_,_,R,R,R,R,R,_,_,_,_,_,_,_],
+                [_,_,_,R,R,R,R,R,R,R,R,R,_,_,_,_],
+                [_,_,_,W,W,W,S,S,W,S,S,_,_,_,_,_],
+                [_,_,W,S,W,S,S,S,W,S,S,S,W,_,_,_],
+                [_,_,W,S,W,S,S,S,S,S,W,S,W,_,_,_],
+                [_,_,W,W,S,W,W,W,S,S,S,S,_,_,_,_],
+                [_,_,_,_,S,S,S,S,S,S,S,_,_,_,_,_],
+                [_,_,_,B,B,R,B,B,B,_,_,_,_,_,_,_],
+                [_,_,B,B,B,R,B,B,Y,B,R,R,_,_,_,_],
+                [_,B,B,B,B,B,B,R,B,B,B,B,R,_,_,_],
+                [_,S,S,B,B,B,B,B,B,B,B,B,B,_,_,_],
+                [_,S,S,B,B,B,B,B,B,B,B,B,B,_,_,_],
+                [_,_,_,B,B,B,B,_,_,B,B,B,B,_,_,_],
+                [_,_,W,W,W,_,_,_,_,_,_,W,W,W,_,_],
+                [_,W,W,W,W,_,_,_,_,_,_,W,W,W,W,_],
+                [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_]
+            ],
+            [ // Frame 2: Right leg up
+                [_,_,_,_,R,R,R,R,R,_,_,_,_,_,_,_],
+                [_,_,_,R,R,R,R,R,R,R,R,R,_,_,_,_],
+                [_,_,_,W,W,W,S,S,W,S,S,_,_,_,_,_],
+                [_,_,W,S,W,S,S,S,W,S,S,S,W,_,_,_],
+                [_,_,W,S,W,S,S,S,S,S,W,S,W,_,_,_],
+                [_,_,W,W,S,W,W,W,S,S,S,S,_,_,_,_],
+                [_,_,_,_,S,S,S,S,S,S,S,_,_,_,_,_],
+                [_,_,_,B,B,R,B,B,B,_,_,_,_,_,_,_],
+                [_,_,B,B,B,R,B,B,Y,B,R,R,_,_,_,_],
+                [_,B,B,B,B,B,B,R,B,B,B,B,R,_,_,_],
+                [_,S,S,B,B,B,B,B,B,B,B,B,B,_,_,_],
+                [_,S,S,B,B,B,B,B,B,B,B,B,B,_,_,_],
+                [_,_,_,B,B,B,B,_,_,B,B,B,B,_,_,_],
+                [_,_,_,W,W,W,_,_,_,_,W,W,W,W,_],
+                [_,_,W,W,W,W,_,_,_,_,_,W,W,W,_],
+                [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_]
+            ],
+            [ // Frame 3: Left leg up
+                [_,_,_,_,_,R,R,R,R,R,_,_,_,_,_,_],
+                [_,_,_,_,R,R,R,R,R,R,R,R,R,_,_,_],
+                [_,_,_,_,W,W,W,S,S,W,S,S,_,_,_,_],
+                [_,_,_,W,S,W,S,S,S,W,S,S,S,W,_,_],
+                [_,_,_,W,S,W,S,S,S,S,S,W,S,W,_,_],
+                [_,_,_,W,W,S,W,W,W,S,S,S,S,_,_,_],
+                [_,_,_,_,_,S,S,S,S,S,S,S,_,_,_,_],
+                [_,_,_,_,B,B,R,B,B,B,_,_,_,_,_,_],
+                [_,_,_,B,B,B,R,B,B,Y,B,R,R,_,_,_],
+                [_,_,B,B,B,B,B,B,R,B,B,B,B,R,_,_],
+                [_,_,S,S,B,B,B,B,B,B,B,B,B,B,_,_],
+                [_,_,S,S,B,B,B,B,B,B,B,B,B,B,_,_],
+                [_,_,_,_,B,B,B,B,_,B,B,B,B,_,_,_],
+                [_,_,_,_,W,W,W,_,_,W,W,W,_,_,_,_],
+                [_,_,_,W,W,W,W,_,W,W,W,W,_,_,_,_],
+                [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_]
+            ]
+        ];
+
+        let charX = -100;
+        let currentFrame = 0;
+        let animationTick = 0;
+        const ticksPerFrame = 8; // Adjust to change animation speed
+        const moveSpeed = 3;     // Adjust to change movement speed
+        const pixelScale = 5;    // Size of each pixel block
+
+        function animateSprite() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Update X position
+            charX += moveSpeed;
+            if (charX > width + 100) {
+                charX = -100; // Reset to the left once it runs off screen
+            }
+
+            // Update Frame
+            animationTick++;
+            if (animationTick >= ticksPerFrame) {
+                animationTick = 0;
+                currentFrame = (currentFrame + 1) % spriteFrames.length;
+            }
+
+            // Draw Sprite
+            const frameToDraw = spriteFrames[currentFrame];
+            const spriteHeight = frameToDraw.length * pixelScale;
+            // Position character near the bottom (15% from bottom)
+            const charY = height - (height * 0.15) - spriteHeight; 
+
+            for (let row = 0; row < frameToDraw.length; row++) {
+                for (let col = 0; col < frameToDraw[row].length; col++) {
+                    const color = frameToDraw[row][col];
+                    if (color) {
+                        ctx.fillStyle = color;
+                        ctx.fillRect(
+                            charX + (col * pixelScale), 
+                            charY + (row * pixelScale), 
+                            pixelScale, 
+                            pixelScale
+                        );
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateSprite);
+        }
+
+        // Start animation loop
+        animateSprite();
+    </script>
+
+    <!-- Interactive Smooth Scroll Script (Optional UI enhancement) -->
+    <script>
+        // Add a simple scroll effect to nav if needed
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
